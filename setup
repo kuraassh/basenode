@@ -2,5 +2,6 @@ if [ -z "$BASE_L1" ]; then
   read -p "Введите rpc Goerli для ноды Base: " BASE_L1
   echo "export BASE_L1='$BASE_L1'" >> $HOME/.profile
 fi
+source $HOME/.profile
 
-sed -i.bak -e "s%^OP_NODE_L1_ETH_RPC = \"${BASE_L1}\"%proxy_app = \"$BASE_L1\"%" $HOME/BaseNode/docker-compose.yml
+sed -i "s#OP_NODE_L1_ETH_RPC=.*#OP_NODE_L1_ETH_RPC=${BASE_L1}#g" $HOME/basenode/docker-compose.yml
